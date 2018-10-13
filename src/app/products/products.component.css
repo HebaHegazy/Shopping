@@ -3,3 +3,74 @@
 	height: 10px;
 	background: linear-gradient(to bottom, #e9e9e9, white);
 }
+
+.productPrice
+{
+	position:relative;
+	margin-top:-65%;
+	background-color: black;
+	color:white;
+	padding: 2%;
+	font-weight:bold;
+	z-index: 2;
+}
+
+.cartBorder
+{
+	border: 1px solid gray;
+	border-radius:16px;
+	box-shadow: 10px 10px 5px lightgrey;
+	padding: 3%;
+	margin-top: 4%;
+}
+
+.payment{
+
+	border:1px solid gray;
+	padding: 5%;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.paidTitle
+{	
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.dueTitle
+{
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+/*mobile view*/
+@media only screen and (max-width: 600px)
+{
+	.productPrice
+	{
+		position:relative;
+		margin-top:-50%;
+	}
+
+	.payment{
+
+		border:1px solid gray;
+		margin-left:  50px;
+		padding: 3%;
+		font-size: 16px;
+		font-weight: bold;
+		width: 200px;
+		text-align: center;
+	}
+	
+	table
+	{
+		table-layout: fixed;
+	}	
+
+	.btn-sm
+	{
+		font-size: 6px;
+	}
+}
