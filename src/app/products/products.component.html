@@ -1,0 +1,140 @@
+<app-navbar></app-navbar>
+<div class="gradientLine"></div>
+<div class="container-fluid">
+	<div class="row">
+	    <div class="col-md-8 col-sm-8 col-xs-12">                                   
+	        <div class="col-md-4" style="padding: 4%;" *ngFor=" let product of products; let i = index ">
+	            
+	            <div style="background-color: #f2f2f2;border-radius:12px;">
+	            	<a routerLink="/" style="text-decoration: none"><img src="{{product.image}}" width="100%" height="200" style="border-radius:8px">
+	                </a>
+	                <div style="position:relative;margin-top:-65%;background-color: black;color:white;padding: 2%;font-weight:bold;z-index: 2" width="20px" class="text-center pull-right">{{product.price}} EGP</div>
+	                <hr style="border-color:#dfdfdf;width: 85%">
+	                <div class="row text-center">
+	                	<span style="color:#616161;">{{product.title}}</span>
+	                	<button class=" btn btn-default" (click)=" clicked(i) ">Add to cart</button>
+
+	                	<!-- <div class="text-center col-md-4" style="color:#9b9b9b;border-right: 1px solid #9b9b9b;font-size: 10px">North Korea</div>
+	                	<div class="text-center col-md-4" style="color:#9b9b9b;font-size: 10px">25 Jan,2013</div> -->
+	            	</div>
+	            	<br>
+	            </div>
+			</div>
+	    </div>
+	    <div class="col-md-4 col-sm-4 " style="border: 1px solid gray;border-radius:16px; box-shadow: 10px 10px 5px lightgrey;padding: 3%;margin-top: 4%">
+
+	    				<div class="row">
+	    					<h1 class="col-md-6">ITEMS</h1>
+                            <br>
+	    					<button class="btn btn-default col-md-3 col-md-offset-3" (click)="clear()">Clear</button>
+	    				</div>
+                        
+                        <div class="row " style="">
+                           <table class="table table-striped" >
+                                <thead>
+                                  <tr>
+                                    <th>Image</th>
+                                                                     
+                                    <th>Title & Price</th>
+                                    <th class="col-md-3">Quantity</th>
+                                    <th>Tools</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                	<tr *ngFor="let product of receiptProducts; let i = index ">
+                                		<td><img src="{{product.prodImage}}" width="50" height="50" /></td>
+                                		<td>
+                                			<span>{{product.prodTitle}}</span>
+                                			<br>
+                                			<span style="font-weight: bold">{{product.prodPrice}} EGP</span>
+                                		</td>
+                                		<td>  <button class="btn btn-sm" style="background-color: #9eeecf;" (click)="minus(i,product.countVal)"><i class="fa fa-minus" aria-hidden="true"></i>
+                                               </button>
+
+                                                {{product.countVal}}
+                                                <button class="btn btn-sm" style="background-color: #9eeecf;margin-left: 6%" (click)="plus(i,product.countVal)"> <i class="fa fa-plus" aria-hidden="true">  </i>
+                                                </button>
+                                		</td>
+                                		<td class="text-center"> 
+                                               
+                                                    <button class="btn"  (click)="removeRow(i)" style="background-color: transparent;"><i class="fa fa-lg fa-trash" aria-hidden="true" style="color:#d78783;"></i>
+                                                    </button>
+                                            </td>
+                                	</tr>
+
+                                    
+                                    <br>
+                                    
+                                       
+                                    
+                                    
+                                
+                                </tbody>
+                            </table> 
+                       <div class="text-center" style="border:1px solid gray;
+                                        padding: 5%;font-size: 18px;font-weight: bold">
+                                        PAY {{total}} EGP
+                                       <button type="button" class="btn btn-default"  style="border:none" data-toggle="modal" data-target="#myModal2">
+                <i style="" class="fa fa-lg fa-shopping-cart"></i>
+            </button>
+          <!-- Modal -->
+                            <div class="modal fade" id="myModal2" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4>Cash Payment</h4>            
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- <ul class="nav nav-tabs">
+                                                <li class="active"><a data-toggle="tab" href="#home">Cash</a></li>
+                                                
+                                            </ul> -->
+
+                                                <div class="row">
+                                                    <h3 class="text-center">Total: <span style="font-size: 17px">{{total}}</span></h3>
+                                                    
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-10 col-md-offset-1">
+                                                     
+                                               <form role="form" class="form-horizontal" #form="ngForm" (ngSubmit)="getPaidAmount(form.value)">
+                                               
+                                                            <div class="col-md-6 p1" style="border-right: 1px solid #eeeeee ">
+                                                                <p style="text-transform: uppercase;font-weight: bold">Paid</p>
+                                                                <!-- <p style="font-weight: bold" class="text-center">5.00 L.E</p> -->
+                                                                <p><input type="text" name="paid" class="form-control" placeholder="Enter the amount paid" #paid="ngModel" ngModel></p>
+                                                                <button class="btn btn-default" (click)="calculate()">calculate</button>
+                                                            </div>
+                                                            <div class="col-md-6 p2">
+                                                                <p style="text-transform: uppercase;font-weight: bold">Due</p>
+                                                                <p style="font-weight: bold;" class="text-center">{{due}}</p>
+                                                            </div> 
+                                                                  
+                                                        </form> 
+                                                       
+                                                    </div>
+                                                </div>
+                                        </div>
+                                      
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default pull-left" >Print </button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>                                 
+                                </div>
+                            </div>
+                                        </div>
+
+
+                        
+                       
+                    </div>
+	</div> 
+
+</div>
+</div>
